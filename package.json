@@ -1,0 +1,49 @@
+{
+  "name": "node-mailreader",
+  "version": "0.0.2",
+  "description": "Read mails for given mail address and password",
+  "main": "lib/index.js",
+  "files": [
+    "lib/**/*"
+  ],
+  "types": "lib/index.d.ts",
+  "keywords": [
+    "read",
+    "mail"
+  ],
+  "scripts": {
+    "test": "tsc --build --clean && tsc --build && mocha lib/test/index.js",
+    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
+    "lint": "tslint -p tsconfig.json",
+    "build": "tsc --build --clean && tsc --build",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm test",
+    "preversion": "",
+    "version": "npm run format && git add -A src",
+    "postversion": "git push && git push --tags"
+  },
+  "author": "ozanbaskan",
+  "license": "ISC",
+  "dependencies": {
+    "imap-simple": "^5.1.0",
+    "lodash": "^4.17.21",
+    "mailparser": "^3.4.0"
+  },
+  "devDependencies": {
+    "@types/imap-simple": "^4.2.5",
+    "@types/lodash": "^4.14.182",
+    "@types/mailparser": "^3.4.0",
+    "@types/mocha": "^9.1.1",
+    "@types/node": "^17.0.26",
+    "@types/nodemailer": "^6.4.4",
+    "mocha": "^9.2.2",
+    "prettier": "^2.6.2",
+    "tslint": "^6.1.3",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^4.6.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RisingDijital/node-mailreader"
+  }
+}
