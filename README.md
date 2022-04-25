@@ -5,7 +5,7 @@ Easy-to-use npm package for reading and filtering mails.
 Only supports mails ending with outlook.com right now.
 
 
-```
+```javascript
 
 import { readMail, searchBetweenStrings } from "node-mailreader";
 const mails = await readMail("username@outlook.com", "password", {FROM: "facebook"})
