@@ -2,12 +2,11 @@ import InvalidArgumentsError from '../classes/InvalidArgumentsError';
 import NoStringFoundError from '../classes/NoStringFoundError';
 import { SearchOptions } from '../helpers/buildSearchConditions';
 import giveBetweeen from '../helpers/giveBetween';
-import readMail from './readMail';
+import readMail, { SearchOptionsForMails } from './readMail';
 
-export interface SearchOptionsForStrings extends SearchOptions {
+export interface SearchOptionsForStrings extends SearchOptionsForMails {
     START?: string;
     END?: string;
-    LAST_MINUTES?: number;
 }
 
 export default async function searchBetweenStrings(user: string, password: string, searchOptions: SearchOptionsForStrings): Promise<string> {
@@ -15,12 +14,7 @@ export default async function searchBetweenStrings(user: string, password: strin
   const end = searchOptions.END;
   if (!start || !end) throw new InvalidArgumentsError("START and END should be given");
   const fixedOptions: SearchOptions = { TEXT: searchOptions.START };
-  if (searchOptions.LAST_MINUTES) {
-      const date = new Date();
-      date.setTime(Date.now() - (searchOptions.LAST_MINUTES * 1000 * 60));
-      fixedOptions.SINCE = date.toISOString();
-  }
-  delete searchOptions.START; delete searchOptions.END; delete searchOptions.LAST_MINUTES;
+  delete searchOptions.START; delete searchOptions.END;
   const mails = await readMail(user, password, Object.assign(searchOptions, fixedOptions));
   for (const mail of mails) {
       const found = giveBetweeen(mail.html + mail.text, start, end);
