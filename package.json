@@ -1,6 +1,6 @@
 {
   "name": "node-mailreader",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "Read mails for given mail address and password",
   "main": "lib/index.js",
   "files": [
@@ -26,10 +26,12 @@
   "license": "ISC",
   "dependencies": {
     "imap-simple": "^5.1.0",
+    "imap-simple-with-socks": "^5.0.3",
     "lodash": "^4.17.21",
     "mailparser": "^3.4.0"
   },
   "devDependencies": {
+    "@sansamour/node-socks": "^1.1.3",
     "@types/imap-simple": "^4.2.5",
     "@types/lodash": "^4.14.182",
     "@types/mailparser": "^3.4.0",
